@@ -1,6 +1,5 @@
 # Stochastic-Production-Planning
 
-
 ## 1. Problem Statement
 
 This project addresses the complex challenge of aggregate production planning for a multi-product electronics portfolio over a 12-week horizon. Traditional planning often fails because it assumes demand is a fixed number. This model was developed to study production stability and financial resilience under demand uncertainty for three core products:
@@ -35,7 +34,11 @@ C (Fridge),2295,2464,6.70,$98.27,84.9%
 ## 3. Business & Managerial Insights
 
 Strategic Note: The following insights were derived from the model's behavior across 12 weeks of fluctuating demand.
-
+| Product	Total Demand	| Units Produced	| Turnover Ratio	| Avg Unit Cost	| Profit Margin |
+| --------------------- | --------------- | --------------- | ------------- | ------------- |
+| A (Monitor)	| 2829	| 3045	| 8.56	| $51.09	| 65.90% |
+| B (TV)	| 2552	| 2702	| 7.26	| $61.72	| 87.70% |
+| C (Fridge)	| 2295	| 2464	| 6.7	| $98.27	| 84.90% |
 
 ## 4. Model Details
 
