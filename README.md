@@ -65,7 +65,7 @@ $$\min Z = \sum_{p \in P} \sum_{t \in T} \left( C_{p,t}^{prod} X_{p,t} + C_{p,t}
 
 Where $Q(x, s)$ represents the Stage 2 costs for scenario $s$:
 
-$$Q(x, s) = \sum_{p \in P} \sum_{t \in T} \left( C_{p,t}^{hold} I_{p,t,s}^{reg} + 3 \cdot C_{p,t}^{hold} I_{p,t,s}^{ovr} + C_{p,t}^{back} B_{p,t,s} \right)$$
+$$Q(x, s) = \sum_{p \in P} \sum_{t \in T} \left( C_{p,t}^{hold}  I_{p,t,s}^{reg} + 3 \cdot C_{p,t}^{hold}  I_{p,t,s}^{ovr} + C_{p,t}^{back} B_{p,t,s} \right)$$
 
 ### Key Constraints
 
