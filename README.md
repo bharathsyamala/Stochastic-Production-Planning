@@ -25,20 +25,65 @@ The model successfully balanced labor stability with inventory agility. By optim
 
 ### Operational Metrics
 
-Product,Total Demand,Units Produced,Turnover Ratio,Avg Unit Cost,Profit Margin
-A (Monitor),2829,3045,8.56,$51.09,65.9%
-B (TV),2552,2702,7.26,$61.72,87.7%
-C (Fridge),2295,2464,6.70,$98.27,84.9%
-
-
-## 3. Business & Managerial Insights
-
 Strategic Note: The following insights were derived from the model's behavior across 12 weeks of fluctuating demand.
-| Product	Total Demand	| Units Produced	| Turnover Ratio	| Avg Unit Cost	| Profit Margin |
-| --------------------- | --------------- | --------------- | ------------- | ------------- |
+| Product |	Total Demand	| Units Produced	| Turnover Ratio	| Avg Unit Cost	| Profit Margin |
+| ------- | ------------- | --------------- | --------------- | ------------- | ------------- |
 | A (Monitor)	| 2829	| 3045	| 8.56	| $51.09	| 65.90% |
 | B (TV)	| 2552	| 2702	| 7.26	| $61.72	| 87.70% |
 | C (Fridge)	| 2295	| 2464	| 6.7	| $98.27	| 84.90% |
+
+## 3. Business & Managerial Insights
+
+Product C (Refrigerator) is the only product experiencing backorders, despite having:
+
+- Highest profit margin: 84.9%
+- Highest selling price: $650
+- Longest lead time: 5 hrs/unit (2.5× Product A)
+
+### Root Cause Analysis:
+With fixed workforce of 60 workers and 5 hrs/unit requirement:
+
+- Max weekly capacity: 60 workers × 60 hrs/week (regular + over time) ÷ 5 hrs/unit = 720 units/week
+- Average weekly demand: 2295 ÷ 12 = 191 units/week
+- Capacity utilization: Only 26.5%
+
+So why backorders?
+The model is starving Product C to allocate labor to Products A & B because:
+
+- Shared workforce: All 3 products compete for same labor pool
+- Throughput matters: 1 hour of labor produces:
+  - Product A: 0.5 units × $150 = $75 revenue/hour
+  - Product B: 0.33 units × $500 = $167 revenue/hour
+  - Product C: 0.2 units × $650 = $130 revenue/hour
+- Product B is most revenue-efficient per labor hour!
+
+The model is rationally choosing B over C, even though C has higher margin.
+
+### Strategic Implications:
+
+- Current state: C customers wait while workforce produces B
+- Customer experience: $650 refrigerator buyers get delayed → brand damage
+- Revenue leakage: C backorders likely convert to cancellations (not captured in model)
+
+### Recommendations:
+
+- Dedicated C Production Line
+  - Allocate 15-20 workers exclusively to Product C
+  - Prevents A/B from cannibalizing C capacity
+  - Ensures premium product (C) gets priority
+  - Cost: Minimal (same workforce, different allocation)
+  - Impact: Eliminate C backorders, protect brand positioning
+
+- Process Improvement Investment
+  - Target: Reduce C production time from 5 hrs → 3.5 hrs (30% improvement)
+  - Methods: Automation, workstation redesign, parallel assembly
+  - Makes C more competitive for labor hours (3.5 hrs → $186 revenue/hour vs B's $167)
+
+- Price Adjustment
+  - Increase C backorder penalty from $65-130 → $150-200
+  - Reflects true customer switching cost (they'll buy competitor's fridge)
+  - Forces model to prioritize C even with current inefficiency
+  - Tests whether C is truly profitable at current production costs
 
 ## 4. Model Details
 
@@ -92,7 +137,9 @@ Inventory stays consistent across time, accounting for the realized demand of ea
 
 $$I_{p,t,s}^{total} = I_{p,t-1,s}^{total} + X_{p,t} - D_{p,t,s} + B_{p,t,s} - B_{p,t-1,s} \quad \forall p, t, s$$
 
-#### 4. Global Warehouse ConstraintsPhysical space is limited for the regular warehouse; excess must go to overflow:
+#### 4. Global Warehouse Constraints
+
+Physical space is limited for the regular warehouse; excess must go to overflow:
 
 $$\sum_{p \in P} \sigma_p I_{p,t,s}^{reg} \le \text{Capacity}_{max} \quad \forall t, s$$
 
